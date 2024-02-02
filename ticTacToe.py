@@ -10,6 +10,8 @@ python minigame hub.
 def ticTacToe():
     # Libraries
     import customtkinter as ctk
+    import time
+    
 
     # CTk appearance: check the docs for more info
     ctk.set_appearance_mode("Dark")
@@ -33,12 +35,12 @@ def ticTacToe():
     
     # Function to process click
     def on_click (button_id):
-        
-        buttons[button_id].configure(state=ctk.DISABLED)
-        print(f"button{button_id+1} pressed")
-        user()
-        buttons[button_id].configure(text=button_symbols[button_id])
-        
+        if startGame():
+            buttons[button_id].configure(state=ctk.DISABLED)
+            print(f"button{button_id+1} pressed")
+            user()
+            buttons[button_id].configure(text=button_symbols[button_id])
+            
     
     buttons=[] # Initialise buttons
 
@@ -55,7 +57,7 @@ def ticTacToe():
         button =ctk.CTkButton(master=frameButtons, text=' ', height=116, width=116, command=lambda i=i:on_click(i))
         button.grid(padx=(10, 2) if column == 0 else (2, 2) if 0 < column < 2 else (2, 10), pady=(10, 2) if row == 0 else (2, 2) if 0 < row < 2 else (2, 10), row=row, column=column)
         buttons.append(button)
-
+        buttons[i].configure(state=ctk.DISABLED)
     # Frame 2
     frameOther = ctk.CTkFrame(master=tic, width=400, height=350)
     frameOther.pack(padx=12, pady=12)
@@ -90,12 +92,29 @@ def ticTacToe():
     firstMove.set("Random")
     firstMove.pack(padx=25, pady=(0,70), side='left')
 
-    start = ctk.CTkButton(master=frameOther, font=('Agency FB', 27), text="Start Game")
+    start = ctk.CTkButton(master=frameOther, font=('Agency FB', 27), text="Start Game",command=startGame)
     start.pack(padx=25, pady=(0,70), side='right')
 
     #this function will be what decides whos turn it is and what their value is x or o
     def user():
         pass
+
+
+#function for starting a game the user needs to select a difficult and who starts before starting the game 
+    def startGame():
+
+        sec = 3
+        
+        
+            
+        while sec > 0:
+                
+            imer =ctk.CTkLabe( text=f"game starting in {sec} seconds")
+            time.sleep(1)
+            sec-=1
+        start.configure(state=ctk.DISABLED)
+        
+
 
     # Run the app
     tic.mainloop()

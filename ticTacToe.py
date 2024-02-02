@@ -30,7 +30,8 @@ def ticTacToe():
     # Frame
     frameButtons = ctk.CTkFrame(master=tic, width=400, height=350)
     frameButtons.pack(padx=12, pady=12)
-    #function to process click
+    
+    # Function to process click
     def on_click (button_id):
         
         buttons[button_id].configure(state=ctk.DISABLED)
@@ -39,37 +40,27 @@ def ticTacToe():
         buttons[button_id].configure(text=button_symbols[button_id])
         
     
-    buttons=[]
+    buttons=[] # Initialise buttons
 
     postions = [
         (0, 0),(0,1),(0,2),
         (1,0),(1,1),(1,2),
         (2,0),(2,1),(2,2)
-
-    ]
-    button_symbols = ['❌', '⭕', '❌', '⭕', '❌', '⭕', '❌', '⭕', '❌']
-    # TicTacToe Buttons
-     # # Where padx 10,0 is 10 padding to the left, 0 to right, pady is 10 to top and 0 to the bottom
+    ] # Button positions
     
-    #works by looping through the postion array with  the enumarate function giving the index of the postion to the i and then adds all the button to the buttons array 
+    button_symbols = ['❌', '⭕', '❌', '⭕', '❌', '⭕', '❌', '⭕', '❌'] # TicTacToe Buttons
+  
+    # Works by looping through the postion array with  the enumarate function giving the index of the postion to the i and then adds all the button to the buttons array 
     for i,( row ,column) in enumerate(postions):
         button =ctk.CTkButton(master=frameButtons, text=' ', height=116, width=116, command=lambda i=i:on_click(i))
         button.grid(padx=(10, 2) if column == 0 else (2, 2) if 0 < column < 2 else (2, 10), pady=(10, 2) if row == 0 else (2, 2) if 0 < row < 2 else (2, 10), row=row, column=column)
         buttons.append(button)
-                          
-
-
-
-    
-
-
 
     # Frame 2
     frameOther = ctk.CTkFrame(master=tic, width=400, height=350)
     frameOther.pack(padx=12, pady=12)
 
     # Other widgets
-
     ctk.CTkLabel(master=frameOther, font=('Agency FB', 42), text="Choose AI difficulty...").pack(pady=(10,1))
 
     def get_difficulty(value):
@@ -105,7 +96,6 @@ def ticTacToe():
     #this function will be what decides whos turn it is and what their value is x or o
     def user():
         pass
-    
 
     # Run the app
     tic.mainloop()

@@ -91,28 +91,37 @@ def ticTacToe():
                                     )
     firstMove.set("Random")
     firstMove.pack(padx=25, pady=(0,70), side='left')
+    #function for starting a game the user needs to select a difficult and who starts before starting the game 
+    timer = ctk.CTkLabel(master=frameOther, text="")
+    timer.pack(pady=(0,10))
+    def startGame():
+        
+        sec = 3
+        
+        while sec > 0:
+        
+            timer.configure(text=f'starting in {sec} seconds')
+            time.sleep(1)
+            sec-=1
+        for i in buttons:
+            i.configure(state=ctk.ACTIVE)
+          #need to fix why it is crashing the program  and make it so the buttons become activie again
+        start.configure(state=ctk.DISABLED)
+        
+
+        
+
+        
 
     start = ctk.CTkButton(master=frameOther, font=('Agency FB', 27), text="Start Game",command=startGame)
-    start.pack(padx=25, pady=(0,70), side='right')
+    start.pack(padx=25, pady=(5,1), side='right')
 
     #this function will be what decides whos turn it is and what their value is x or o
     def user():
         pass
 
 
-#function for starting a game the user needs to select a difficult and who starts before starting the game 
-    def startGame():
 
-        sec = 3
-        
-        
-            
-        while sec > 0:
-                
-            imer =ctk.CTkLabe( text=f"game starting in {sec} seconds")
-            time.sleep(1)
-            sec-=1
-        start.configure(state=ctk.DISABLED)
         
 
 

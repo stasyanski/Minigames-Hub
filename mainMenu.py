@@ -34,7 +34,7 @@ menu.iconbitmap('Resources/iconbitmap.ico')
 
 # Frame
 frameButtons = ctk.CTkFrame(master=menu)
-frameButtons.pack(padx=12, pady=12) # Putting a frame on master window which is menu
+frameButtons.pack(padx=12, pady=12) # Putting a frame on master window which is menU
 
 # Button images
 ticTacToe_image = ctk.CTkImage(light_image=Image.open('Resources/ticTacToe.png'),
@@ -48,11 +48,11 @@ hangman_image = ctk.CTkImage(light_image=Image.open('Resources/hangman.png'),
 game1 = ctk.CTkButton(master=frameButtons, text=' ',image=ticTacToe_image, width=367, height=268, command=ticTacToe)
 game1.grid(padx=10, pady=10, row=0, column=0)
 
-# game1 button has already been used. when linking a button, import the function (from tictactoe import tictactoe)
-# link it using command = , change the text = , and remove the state =  and fg_color options.
-
 game2 = ctk.CTkButton(master=frameButtons, text=' ',image=hangman_image, width=367, height=268, fg_color='#4169e1', hover_color='#3241A6', command=' ') #royal blue hex
 game2.grid(padx=10, pady=10, row=0, column=1)
+
+# game1 and 2 button has already been used. when linking a button, import the function (from tictactoe import tictactoe)
+# link it using command = , change the text = , and remove the state =  and fg_color options.
 
 game3 = ctk.CTkButton(master=frameButtons, text='To be added', width=367, height=268, state='disabled', fg_color='#5A5A5A')
 game3.grid(padx=10, pady=10, row=1, column=0)

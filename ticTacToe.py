@@ -17,7 +17,7 @@ def ticTacToe():
 
     #-------------------Menu window-------------------
     tic = ctk.CTk() # Reference to menu window as 'menu' 
-    window_height = 660; window_width = 400
+    window_height = 640; window_width = 400
     screen_width = tic.winfo_screenwidth()
     screen_height = tic.winfo_screenheight()
     center_x = int(screen_width/2 - window_width / 2)
@@ -111,7 +111,7 @@ def ticTacToe():
     difficulty.pack(padx=25, pady=(0,10))
 
     #-------------------Who moves first-------------------
-    ctk.CTkLabel(master=frameOther, font=('Agency FB', 42), text="Who moves first...").pack(pady=(5,1))
+    ctk.CTkLabel(master=frameOther, font=('Agency FB', 26), text="Who moves first...              Click below to   ").pack(pady=(5,1))
     # ! this button needs aligning to left side and maybe font made smaller.
 
     firstMove_var = ctk.StringVar(value="Random")

@@ -1,3 +1,10 @@
+! All credits to the corresponding author !
+
 TicTacToe illustration belongs to: 
 https://www.vecteezy.com/png/13127170-hand-drawn-tic-tac-toe-illustration  
-all credits to the corresponding author
+
+Onclick sound effect belongs to:
+https://mixkit.co/free-sound-effects/click/
+
+Hangman rope illustration belongs to:
+https://www.vecteezy.com/vector-art/26376236-modern-design-icon-of-hanging-rope

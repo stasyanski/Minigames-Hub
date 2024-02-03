@@ -34,11 +34,10 @@ def ticTacToe():
 
     # Function to process click
     def on_click (button_id):
-        # buttons[button_id].configure(state=ctk.DISABLED)
         buttons[button_id].configure(state=ctk.DISABLED)
         print(f"button{button_id+1} pressed")
-        user()
-        buttons[button_id].configure(text=button_symbols[button_id])
+        user() # calls user function
+        buttons[button_id].configure(text=button_symbols[button_id], text_color_disabled='white', fg_color = '#539f7e')
 
     # uses a recursive function to display the time and the after method allows you to wait a certain amouont of time for it to update 
     def count(sec):
@@ -46,17 +45,15 @@ def ticTacToe():
             timer.configure(text=f"-----------------------------  Starting in {sec} seconds  -----------------------------")
             timer.after(1000,count,sec-1)
         else :
-            timer.configure(text="--------------------------------  Game started  -------------------------------------")
+            timer.configure(text="----------------------------------  Game started  ----------------------------------")
+            for current in buttons:
+                current.configure(state=ctk.NORMAL, hover_color='#106a43')
     
     # start game
     def startGame():
-        start.configure(state=ctk.DISABLED)
-        sec = 3
-        count(sec)
-        for i in buttons:
-            i.configure(state=ctk.ACTIVE)
-        return True
-
+        for current in ((firstMove, difficulty, start)):
+            current.configure(state=ctk.DISABLED)
+        count(3) # calls count functin
     
     # this function will be what decides whos turn it is and what their value is x or o
     def user():
@@ -116,7 +113,9 @@ def ticTacToe():
     firstMove_var = ctk.StringVar(value="Random")
     firstMove = ctk.CTkComboBox(master=frameOther, values=["Me", "The AI", "Random"],
                                     variable=firstMove_var,
-                                    font=('Agency FB', 27)
+                                    font=('Agency FB', 27),
+                                    state='readonly',
+                                    dropdown_font=('Agency FB',22)
                                     )
     firstMove.set("Random")
     firstMove.pack(padx=25, pady=(0,20), side='left')

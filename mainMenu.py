@@ -69,7 +69,6 @@ def on_click(x, y, button, pressed): # The on_click listener func takes x,y,butt
         mixer.music.load('Resources\onclick_effect.mp3') # Dir to the sound effect
         mixer.music.play()
 
-
 with mouse.Listener(on_click=on_click) as listener: # The listener esentially listens for mouse presses
 
     # RUN TK WINDOW example root.mainloop() SHOULD GO HERE!

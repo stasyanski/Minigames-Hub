@@ -48,16 +48,15 @@ def ticTacToe():
         else :
             timer.configure(text="--------------------------------  Game started  -------------------------------------")
     
-    # needs to make this function only run when the user has selected a difficultity 
+    # start game
     def startGame():
         start.configure(state=ctk.DISABLED)
         sec = 3
-        
         count(sec)
         for i in buttons:
             i.configure(state=ctk.ACTIVE)
         return True
-          #need to fix why it is crashing the program  and make it so the buttons become active again
+
     
     # this function will be what decides whos turn it is and what their value is x or o
     def user():
@@ -108,11 +107,11 @@ def ticTacToe():
                                                     variable=difficulty_var,
                                                     font=('Agency FB', 27)
                                                     )
+    difficulty.set(" Intermediate ")
     difficulty.pack(padx=25, pady=(0,10))
 
     #-------------------Who moves first-------------------
     ctk.CTkLabel(master=frameOther, font=('Agency FB', 26), text="Who moves first...              Click below to   ").pack(pady=(5,1))
-    # ! this button needs aligning to left side and maybe font made smaller.
 
     firstMove_var = ctk.StringVar(value="Random")
     firstMove = ctk.CTkComboBox(master=frameOther, values=["Me", "The AI", "Random"],

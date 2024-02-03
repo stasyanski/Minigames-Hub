@@ -35,11 +35,13 @@ def ticTacToe():
     
     # Function to process click
     def on_click (button_id):
-        if startGame():
-            buttons[button_id].configure(state=ctk.DISABLED)
-            print(f"button{button_id+1} pressed")
-            user()
-            buttons[button_id].configure(text=button_symbols[button_id])
+        
+        
+            # buttons[button_id].configure(state=ctk.DISABLED)
+        buttons[button_id].configure(state=ctk.DISABLED)
+        print(f"button{button_id+1} pressed")
+        user()
+        buttons[button_id].configure(text=button_symbols[button_id])
             
     
     buttons=[] # Initialise buttons
@@ -94,20 +96,26 @@ def ticTacToe():
     #function for starting a game the user needs to select a difficult and who starts before starting the game 
     timer = ctk.CTkLabel(master=frameOther, text="")
     timer.pack(pady=(0,10))
+
+    #needs to make this function only run when the user has selected a difficultity 
     def startGame():
-        
+        start.configure(state=ctk.DISABLED)
         sec = 3
         
-        while sec > 0:
-        
-            timer.configure(text=f'starting in {sec} seconds')
-            time.sleep(1)
-            sec-=1
+        count(sec)
         for i in buttons:
             i.configure(state=ctk.ACTIVE)
+        return True
           #need to fix why it is crashing the program  and make it so the buttons become activie again
-        start.configure(state=ctk.DISABLED)
         
+        
+    #uses a recursive function to display the time and the after method allows you to wait a certain amouont of tie for it to update 
+    def count(sec):
+        if sec>0:
+            timer.configure(text=f"starting in {sec} seconds")
+            timer.after(1000,count,sec-1)
+        else :
+            timer.configure(text="game started")
 
         
 
@@ -115,6 +123,7 @@ def ticTacToe():
 
     start = ctk.CTkButton(master=frameOther, font=('Agency FB', 27), text="Start Game",command=startGame)
     start.pack(padx=25, pady=(5,1), side='right')
+    
 
     #this function will be what decides whos turn it is and what their value is x or o
     def user():

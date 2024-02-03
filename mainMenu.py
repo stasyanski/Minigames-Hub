@@ -40,15 +40,18 @@ frameButtons.pack(padx=12, pady=12) # Putting a frame on master window which is 
 ticTacToe_image = ctk.CTkImage(light_image=Image.open('Resources/ticTacToe.png'),
                                   dark_image=Image.open('Resources/ticTacToe.png'),
                                   size=(250,250))
+hangman_image = ctk.CTkImage(light_image=Image.open('Resources/hangman.png'),
+                                  dark_image=Image.open('Resources/hangman.png'),
+                                  size=(250,250))
 
 # Buttons for games
-game1 = ctk.CTkButton(master=frameButtons, text=' ', image=ticTacToe_image, width=367, height=268, command=ticTacToe)
+game1 = ctk.CTkButton(master=frameButtons, text=' ',image=ticTacToe_image, width=367, height=268, command=ticTacToe)
 game1.grid(padx=10, pady=10, row=0, column=0)
 
 # game1 button has already been used. when linking a button, import the function (from tictactoe import tictactoe)
 # link it using command = , change the text = , and remove the state =  and fg_color options.
 
-game2 = ctk.CTkButton(master=frameButtons, text='To be added', width=367, height=268, state='disabled', fg_color='#5A5A5A')
+game2 = ctk.CTkButton(master=frameButtons, text=' ',image=hangman_image, width=367, height=268, fg_color='#4169e1', hover_color='#3241A6', command=' ') #royal blue hex
 game2.grid(padx=10, pady=10, row=0, column=1)
 
 game3 = ctk.CTkButton(master=frameButtons, text='To be added', width=367, height=268, state='disabled', fg_color='#5A5A5A')
@@ -70,8 +73,6 @@ def on_click(x, y, button, pressed): # The on_click listener func takes x,y,butt
 with mouse.Listener(on_click=on_click) as listener: # The listener esentially listens for mouse presses
 
     # RUN TK WINDOW example root.mainloop() SHOULD GO HERE!
-
-    # Run the app
     menu.mainloop()
 
     listener.join() # The join() method takes all items in an iterable and joins them into one string.A string must be specified as the separator.

@@ -7,6 +7,8 @@ for the ticTacToe minigame for our
 python minigame hub.
 """
 current='❌'
+turn = True
+end = False
 def ticTacToe():  
     #-------------------Libraries-------------------
     import customtkinter as ctk
@@ -33,23 +35,58 @@ def ticTacToe():
 
     #-------------------All functions go in below-------------------
 
+    # start game
+    def startGame():
+        start.configure(state=ctk.DISABLED)
+        sec = 3
+        count(sec)
+        for i in buttons:
+            i.configure(state=ctk.ACTIVE)
+        #if the user starts it will call the user function first to give them their go 
+        if firstMove.get() == "Me":
+            user()
+        
+            
+
+        timer.configure(text="----------------------------------  Game started  ----------------------------------")
+        for current in buttons:
+            current.configure(state=ctk.NORMAL, hover_color='#106a43')
+
+    # end game
+    def end_game():
+        global end
+        end = True
+        for i in buttons:
+            i.configure(state=ctk.DISABLED)
+    #function to check win conditions
+    def check_winner():
+        pass
+
 
     # Function to process click
-    def on_click (button_id,player):
-        
+    def on_click (button_id):
+        global turn,current,end
         # buttons[button_id].configure(state=ctk.DISABLED)
-        buttons[button_id].configure(state=ctk.DISABLED)
-        print(f"button{button_id+1} pressed")
-        # user()
-        
-        buttons[button_id].configure(text=player,text_color_disabled='white',fg_color ='#539f7e')
-        global current
-        current ='⭕' if current =='❌' else '❌'
-        # if buttons[button_id].configure(text=):
-        #     button.configure(foreground='black')
-
+        if not end:
+            buttons[button_id].configure(state=ctk.DISABLED)
+            print(f"button{button_id+1} pressed")
+            # user()
+            
+            buttons[button_id].configure(text=current,text_color_disabled='white',fg_color ='#539f7e')
     
+            # this will change current to the next turn and will check a winner 
+            if current == '❌':
+                current = '⭕'
+            else:
+                current = '❌'
 
+            if check_winner():
+                pass
+            elif current == '⭕' :
+                ai()
+            elif current == '❌' :
+                user()
+                
 
     # uses a recursive function to display the time and the after method allows you to wait a certain amouont of time for it to update 
     def count(sec):
@@ -61,48 +98,26 @@ def ticTacToe():
 
             timer.configure(text="--------------------------------  Game started  -------------------------------------")
             
-    # start game
-    def startGame():
-        start.configure(state=ctk.DISABLED)
-        sec = 3
-        count(sec)
-        for i in buttons:
-            i.configure(state=ctk.ACTIVE)
-        
-        user()
-        for i in buttons:
-            print(i)
-
-            timer.configure(text="----------------------------------  Game started  ----------------------------------")
-            for current in buttons:
-                current.configure(state=ctk.NORMAL, hover_color='#106a43')
     
-    # start game
-    
-
-    
-    # this function will be what decides whos turn it is and what their value is x or o
+   
+    #function for the user to allow them to put their character where they want it 
     def user():
-
-        
-        #this if statment say if first move == me it will go through the buttons and let the user pick first
-        if firstMove.get() == "Me":
-            for j ,(x,y)in  enumerate(positions):
-                
-                buttons[j].configure(command=lambda i=j:on_click(i,current))
-
-                
-                
-
-        if firstMove.get() == "Ai":
-            pass
-        else:
-            pass
-        
+        for j ,(x,y)in  enumerate(positions):
+            buttons[j].configure(command=lambda i=j:on_click(i))
+    #ai function which uses a list comprehension to see the avliable spaces in the game 
+    def ai():
+        available_spots = [i for i, button in enumerate(buttons) if button.cget('text') == ' ']
+        #if there are any aviables places it uses the random choice function to select a spot 
+        if available_spots:
+            ai_choice = random.choice(available_spots)
             
-            
+            on_click(ai_choice)
+        else :
+            end_game()
 
-
+    #function that will be used to assign difficulty
+    def difficulty_ai():
+        pass
     #-------------------All functions go in above-------------------
         
 

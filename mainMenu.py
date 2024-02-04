@@ -7,20 +7,21 @@ of our Minigames Hub project, where the user
 can select their preferred minigame to play.
 """
 
-# Libraries
+#-------------------Libraries-------------------
 import customtkinter as ctk
 from PIL import Image # For putting CTk Images
 from pynput import mouse # Mouse listener
 from pygame import mixer # Sound player for on mouse press
 
-# Import functions from other files
+#-------------------Import functions from other files-------------------
 from ticTacToe import ticTacToe
+from hangman import hangman
 
-# CTk appearance: check the docs for more info
+#-------------------CTk appearance: check the docs for more info-------------------
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("green")  
 
-# Menu window
+#-------------------Menu window-------------------
 menu = ctk.CTk() # Reference to menu window as 'menu' 
 window_height = 600; window_width = 800
 screen_width = menu.winfo_screenwidth()
@@ -32,11 +33,11 @@ menu.resizable(width=False, height=False)
 menu.title('Minigames Hub')
 menu.iconbitmap('Resources/iconbitmap.ico')
 
-# Frame
+#-------------------Frame-------------------
 frameButtons = ctk.CTkFrame(master=menu)
 frameButtons.pack(padx=12, pady=12) # Putting a frame on master window which is menU
 
-# Button images
+#-------------------Button images-------------------
 ticTacToe_image = ctk.CTkImage(light_image=Image.open('Resources/ticTacToe.png'),
                                   dark_image=Image.open('Resources/ticTacToe.png'),
                                   size=(250,250))
@@ -44,15 +45,12 @@ hangman_image = ctk.CTkImage(light_image=Image.open('Resources/hangman.png'),
                                   dark_image=Image.open('Resources/hangman.png'),
                                   size=(250,250))
 
-# Buttons for games
+#-------------------Buttons for games-------------------
 game1 = ctk.CTkButton(master=frameButtons, text=' ',image=ticTacToe_image, width=367, height=268, command=ticTacToe)
 game1.grid(padx=10, pady=10, row=0, column=0)
 
-game2 = ctk.CTkButton(master=frameButtons, text=' ',image=hangman_image, width=367, height=268, fg_color='#4169e1', hover_color='#3241A6', command=' ') #royal blue hex
+game2 = ctk.CTkButton(master=frameButtons, text=' ',image=hangman_image, width=367, height=268, fg_color='#4169e1', hover_color='#3241A6', command=hangman) #royal blue hex
 game2.grid(padx=10, pady=10, row=0, column=1)
-
-# game1 and 2 button has already been used. when linking a button, import the function (from tictactoe import tictactoe)
-# link it using command = , change the text = , and remove the state =  and fg_color options.
 
 game3 = ctk.CTkButton(master=frameButtons, text='To be added', width=367, height=268, state='disabled', fg_color='#5A5A5A')
 game3.grid(padx=10, pady=10, row=1, column=0)
@@ -60,7 +58,7 @@ game3.grid(padx=10, pady=10, row=1, column=0)
 game4 = ctk.CTkButton(master=frameButtons, text='To be added', width=367, height=268, state='disabled', fg_color='#5A5A5A')
 game4.grid(padx=10, pady=10, row=1, column=1)
 
-# Mouse listener function
+#-------------------Mouse listener function-------------------
 def on_click(x, y, button, pressed): # The on_click listener func takes x,y,button, and pressed, but for our app we only require button and pressed data
     if pressed: print('pressed', button)
     button = str(button)

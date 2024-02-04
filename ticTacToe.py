@@ -7,7 +7,7 @@ for the ticTacToe minigame for our
 python minigame hub.
 """
 current='❌'
-def ticTacToe():
+def ticTacToe():  
     #-------------------Libraries-------------------
     import customtkinter as ctk
     import time

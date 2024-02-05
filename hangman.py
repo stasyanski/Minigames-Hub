@@ -10,17 +10,13 @@ python minigame hub.
 def hangman():
     #-------------------Libraries-------------------
     import customtkinter as ctk
-    from PIL import Image
-
-    #-------------------Import from other files-------------------
-    import mainMenu # used as parent window for CTkToplevel
 
     #-------------------CTk appearance-------------------
     ctk.set_appearance_mode("Dark")
     ctk.set_default_color_theme("green")
 
     #-------------------Hangman window-------------------
-    hang = ctk.CTkToplevel() # Reference to hangman window as hang, NEEDS TO BE TOPLEVEL AS PIL CAN ONLY RENDER ONE WINDOW AT A TIME!
+    hang = ctk.CTk() # Reference to hangman window as hang, NEEDS TO BE TOPLEVEL AS PIL CAN ONLY RENDER ONE WINDOW AT A TIME!
     window_height = 550; window_width = 850
     screen_width = hang.winfo_screenwidth()
     screen_height = hang.winfo_screenheight()
@@ -53,12 +49,8 @@ def hangman():
     wordFrame.grid_propagate(False); wordFrame.grid(padx=(0,12),pady=12, column=1,row=0, sticky='e')
 
     #-------------------Hangman-------------------
-    hangmanImage = ctk.CTkImage(light_image=Image.open('Resources/hang0.png'),
-                                dark_image=Image.open('Resources/hang0.png'),
-                                size=(407, 526))
-    
-    hangmanImageLabel = ctk.CTkLabel(master=hangmanFrame, image=hangmanImage,text='')
-    hangmanImageLabel.pack()
+
+        #code here
 
     #-------------------Creating buttons using for loop-------------------
     alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE']

@@ -17,7 +17,7 @@ def ticTacToe():
     ctk.set_default_color_theme("green") 
 
     #-------------------Menu window-------------------
-    tic = ctk.CTk() # Reference to menu window as 'menu' 
+    tic = ctk.CTk() # Reference to ticTacToe window as tic 
     window_height = 640; window_width = 400
     screen_width = tic.winfo_screenwidth()
     screen_height = tic.winfo_screenheight()

@@ -10,6 +10,7 @@ def hangman():
     #-------------------Libraries-------------------
     import customtkinter as ctk
     import random
+    import time
 
     #-------------------CTk appearance-------------------
     ctk.set_appearance_mode("Dark")
@@ -52,9 +53,8 @@ def hangman():
 
     #-------------------Hangman-------------------
 
-    def on_click():
-        pass
-                
+    def highlighted():
+        letter_list[0].configure(fg_color='#CFFDBC', text_color='black')
 
     
     #-------------------Display word-------------------
@@ -102,5 +102,6 @@ def hangman():
             button.grid(column=columnNum, row=rowNum, pady=1, padx=1)
         button_list.append(button)
 
+    highlighted()
     # Run the app
     hang.mainloop()

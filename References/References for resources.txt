@@ -8,3 +8,6 @@ https://mixkit.co/free-sound-effects/click/
 
 Hangman rope illustration belongs to:
 https://www.vecteezy.com/vector-art/26376236-modern-design-icon-of-hanging-rope
+
+Turtle code taken from and adapted:
+https://github.com/john-u/hangman/blob/main/hangman.py

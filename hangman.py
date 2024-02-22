@@ -10,9 +10,13 @@ def hangman():
     #-------------------Libraries-------------------
     import customtkinter as ctk
     import random # for choosing word from wordpool
-    import turtle # using turtle for hangman
+    import turtle # using t for hangman
     import tkinter as tk # using tk canvas, as ctk canvas produces unwanted behaviour
     from CTkMessagebox import CTkMessagebox
+
+    #-------------------Global Var-------------------
+    global num_attempts # this var is used accross different funcs
+    num_attempts = 0 # defining as 0 for number of attempts
 
     #-------------------CTk appearance-------------------
     ctk.set_appearance_mode("Dark")
@@ -33,15 +37,147 @@ def hangman():
 
     #-------------------All functions go in below-------------------
     
+    def game(id, button): # get button ID (index within alphabet list) and the button pressed
+        global num_attempts
+        
+        button_list[id].configure(state=ctk.DISABLED, fg_color='#dcdcdc') # disables a button after pressed 
 
+        for loop in range(len(word)): # checks each letter of word
+            if button in word[loop]: # if button pressed is in word
+                letter_list[loop].configure(text=word[loop], text_color='black')
+                    # the display letter is revealed
 
-       
+        if button not in word: # if the button is not in word
+            num_attempts += 1 # increase attetmpts taken by 1
+            wrong(num_attempts) # call the wrong func with nr of atttempts
+        
+        # all() returns true only if all value are NOT '_', as '_' is the default text for letter_list
+        if all(value.cget("text") is not '_' for value in letter_list): 
+
+            #if all() is true, win notif appears
+            wonnotif = CTkMessagebox(title='End of game', message="You've won! Congratulations", fade_in_duration=1, justify='center', 
+                          icon='check', button_color='gray', button_hover_color='white', button_text_color='black',
+                          option_1='Restart', option_2='Quit')
+            
+            if wonnotif.get() == 'Restart':
+                hang.destroy() # destroys current game
+                hangman() # creates new game
+            hang.destroy() # destroys current game
+            
+    def lost(): # gets called when nr attempts is 7
+            for loop in button_list:
+                loop.configure(state=ctk.DISABLED) # disabled the entire keyboard
+
+            # lost notif appears asking user if they want to restart or quit
+            lostnotif = CTkMessagebox(title='End of game', message=f"You lost. The word was {word}!", fade_in_duration=1, justify='center', 
+                          icon='question', button_color='gray', button_hover_color='white', button_text_color='black',
+                          option_1='Restart', option_2='Quit')
+            if lostnotif.get() == 'Restart':
+                hang.destroy() # destroys current game
+                hangman() # creates new game
+            hang.destroy() # destroys current game
+                
+    def wrong(num_attempts):
+
+        # special thanks to: turtle code taken from https://github.com/john-u/hangman/blob/main/hangman.py
+        # adapted code to this projects needs
+    
+        t = turtle.RawTurtle(hangCanvas)
+        t.speed(0)
+        t.width(3)
+        t.hideturtle()
+
+        if num_attempts == 1:
+            # draw gallow bottom
+            t.penup()
+            t.goto(40, -200)
+            t.pendown()
+            t.forward(45)
+            t.left(180)
+            t.forward(90)
+            t.right(180)
+            t.forward(45)
+            # draw gallow top
+            t.left(90)
+            t.forward(175)
+            t.left(90)
+            t.forward(75)
+            t.left(90)
+            t.forward(35)
+            t.penup()
+
+        elif num_attempts == 2:
+            # draw head
+            t.penup()
+            t.goto(-49.5, -75)
+            t.pendown()
+            t.right(90)
+            t.circle(15,None,100)
+            t.penup()
+
+        elif num_attempts == 3:
+            # draw torso
+            t.penup()
+            t.goto(-35.5, -160)
+            t.pendown()
+            t.left(90)
+            t.penup()
+            t.forward(30)
+            t.pendown()
+            t.forward(40)
+            t.right(180)
+            t.forward(30)
+            t.penup()
+
+        elif num_attempts == 4:
+            # draw first arm
+            t.penup()
+            t.goto(-62, -140)
+            t.pendown()
+            t.left(55)
+            t.forward(45)
+            t.right(180)
+            t.forward(45)
+            t.penup()
+
+        elif num_attempts == 5:
+            # draw second arm
+            t.penup()
+            t.goto(-8, -140)
+            t.pendown()
+            t.left(125)
+            t.forward(45)
+            t.right(180)
+            t.forward(45)
+            t.penup()
+
+        elif num_attempts == 6:
+            # draw first leg
+            t.penup()
+            t.goto(-35, -130)
+            t.pendown()
+            t.right(120)
+            t.forward(45)
+            t.penup()
+
+        elif num_attempts == 7:
+            # draw second leg
+            t.penup()
+            t.goto(-35, -130)
+            t.pendown()
+            t.right(60)
+            t.forward(45)
+            t.penup()
+            
+            # at the last try, triggest the lost func
+            lost() # triggest lost func to display CTkMessageBox 
 
     #-------------------All functions go in above-------------------
 
-    
+
+
     #-------------------Left frame and right frame-------------------
-    hangCanvas = tk.Canvas(master=hang) # custom tkinter seems to be broken when using ctk.CTkCanvas, tkinter naturally goes with turtle canvas
+    hangCanvas = tk.Canvas(master=hang) # custom tkinter seems to be broken when using ctk.CTkCanvas, tkinter naturally goes with t canvas
     hangCanvas.grid_propagate(False); hangCanvas.pack(side="left", fill="both", expand=True)
     # for side, fill and expand visual guide check https://stackoverflow.com/questions/28089942/difference-between-fill-and-expand-options-for-tkinter-pack-method
 
@@ -53,25 +189,8 @@ def hangman():
     # height here (in wordFrame and keyboardFrame) is 4 more pixels as CTkFrame and CTkCanvas respects height value differently.
     keyboardFrame.grid_propagate(False); keyboardFrame.pack(side="bottom", fill="both", padx=5, pady=5)
 
-    #-------------------Hangman-------------------
 
-    def game(id, button):
-        button_list[id].configure(state=ctk.DISABLED, fg_color='#dcdcdc')
-        for loop in range(len(word)):
-            if button in word[loop]:
-                letter_list[loop].configure(text=word[loop], text_color='black')
-        
-        # all() returns true only if all value are NOT '_', as '_' is the default text for letter_list
-        if all(value.cget("text") is not '_' for value in letter_list): 
-            CTkMessagebox(title='End of game', message="You've won! Congratulations", fade_in_duration=1, justify='center', 
-                          icon='check', button_color='gray', button_hover_color='white', button_text_color='black')
-                
-    def wrong():
-        for loop in range(0,1):
-            draw = turtle.RawTurtle(hangCanvas)
-            draw.circle(10)
-        
-        
+
     #-------------------Display word-------------------
     wordPool = ['BLIZZARD', 'OXYGEN', 'HYPERTROPHY', 'VOODOO', 'ZODIAC', 'XYLOPHONE', 'TRANSCRIPT', 'UNBEKNOWN', 'AFOREMENTIONED', 'VISION',
                 'PNEUMONIA', 'SCISSORS', 'MISCHIEVOUS', 'PENGUIN', 'EPITOME', 'STOICISM', 'NIHILISM', 'ALGEBRA', 'DOCTRINE', 'SHENANIGANS', 'HANGMAN', 
@@ -82,7 +201,9 @@ def hangman():
 
     word = random.choice(wordPool) # chooses random word from wordPool
     print(word)
-    
+
+
+
     #-------------------Creating empty label based on current word-------------------
     relxval = 0.0; relyval = 0.3
     letter_list=[]
@@ -97,6 +218,8 @@ def hangman():
             letter.place(relx=relxval, rely=relyval, anchor="c")
             # append the list of buttons with the currently created one
             letter_list.append(letter)
+
+
 
     #-------------------Creating buttons using for loop-------------------
     alphabet = {'A': (3, 0), 'B': (3, 1), 'C': (3, 2), 'D': (3, 3), 'E': (3, 4), 'F': (3, 5), 'G': (3, 6), 'H': (3, 7),

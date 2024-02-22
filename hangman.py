@@ -10,7 +10,6 @@ def hangman():
     #-------------------Libraries-------------------
     import customtkinter as ctk
     import random
-    import time
 
     #-------------------CTk appearance-------------------
     ctk.set_appearance_mode("Dark")
@@ -52,25 +51,29 @@ def hangman():
     keyboardFrame.grid_propagate(False); keyboardFrame.pack(side="bottom", fill="both", padx=5, pady=5)
 
     #-------------------Hangman-------------------
-
-    def highlighted():
-        letter_list[0].configure(fg_color='#CFFDBC', text_color='black')
-
-    
+    def game(button):
+        for loop in range(len(word)):
+            if button in word[loop]:
+                letter_list[loop].configure(text=word[loop])
+            else: 
+                print('wrong')
+        
     #-------------------Display word-------------------
-    wordPool = ['BLIZZARD', 'OXYGEN', 'HYPERTROPHY', 'VOODOO', 'ZODIAC', 'XYLOPHONE', 'KAYAK', 'TRANSCRIPT', 'UNBEKNOWN', 'AFOREMENTIONED',
+    wordPool = ['BLIZZARD', 'OXYGEN', 'HYPERTROPHY', 'VOODOO', 'ZODIAC', 'XYLOPHONE', 'TRANSCRIPT', 'UNBEKNOWN', 'AFOREMENTIONED', 'VISION',
                 'PNEUMONIA', 'SCISSORS', 'MISCHIEVOUS', 'PENGUIN', 'EPITOME', 'STOICISM', 'NIHILISM', 'ALGEBRA', 'DOCTRINE', 'SHENANIGANS', 'HANGMAN', 
                 'CAR WASH', 'FATHER IN LAW', 'OVER THE COUNTER', 'UNDER THE SEA', 'OUTER SPACE', 'POST CARD', 'NOSE BLEED', 'KICK BOXING', 'FRENCH FRIES',
                 'CHOCOLATE CHIP', 'BODY GUARD', 'BANTAM WEIGHT', 'BUSINESS MAN', 'CHECK MATE', 'DOWN STREAM', 'FINGER PRINT', 'FRAME WORK', 'GENTLE MAN']
                     # feel free to add words, both compound words and normal words
+                    # ! words must be 6 or more letters !
 
     word = random.choice(wordPool) # chooses random word from wordPool
+    print(word)
     
     #-------------------Creating empty label based on current word-------------------
     relxval = 0.0; relyval = 0.3
     letter_list=[]
 
-    for loop in range(0, len(word)+1):
+    for loop in range(0, len(word)):
             relxval += 0.143 # adjust spacing between buttons, .143 is perfect spacing
             if loop % 6 == 0 : # if divisible by 6 (6,12,18,etc.) create a new row
                 relyval += 0.12 # increase y spacing
@@ -101,7 +104,24 @@ def hangman():
                                    fg_color='whitesmoke', text_color='gray', hover_color='#EEEEEE')
             button.grid(column=columnNum, row=rowNum, pady=1, padx=1)
         button_list.append(button)
+    
+    # alphabet list to assign each button to the respective letter
+    # having an alphabet dict and an alphabet list seems reduntant, think of an alternative, for example, ordered dict from collections
+    alphabet_list = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE']
+    for loop in range(len(button_list)):
+        button_list[loop].configure(command=lambda x=alphabet_list[loop]: game(x))
+    
+    """
+    rather complex for loop and not easy to read, it iterates over everything in button_list, 
+    in this case, the letter buttons and the lambda function captures current value of alphabet_list, 
+    and uses loop as index and assigns to x, esentially referencing each button with an the respective letter 
+    in the list between 0 to 26, including space.
 
-    highlighted()
+    we pass loop to x first, if we dont, all buttons would end up assigning to index 26, passing it to
+    lambda as x ensures capturing current value of loop at the time the lambda function is created
+
+    not sure if this explanation is great...
+    """ 
+
     # Run the app
     hang.mainloop()

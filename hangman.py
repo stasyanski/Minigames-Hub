@@ -12,6 +12,7 @@ def hangman():
     import random # for choosing word from wordpool
     import turtle # using turtle for hangman
     import tkinter as tk # using tk canvas, as ctk canvas produces unwanted behaviour
+    from CTkMessagebox import CTkMessagebox
 
     #-------------------CTk appearance-------------------
     ctk.set_appearance_mode("Dark")
@@ -53,14 +54,18 @@ def hangman():
     keyboardFrame.grid_propagate(False); keyboardFrame.pack(side="bottom", fill="both", padx=5, pady=5)
 
     #-------------------Hangman-------------------
+
     def game(id, button):
         button_list[id].configure(state=ctk.DISABLED, fg_color='#dcdcdc')
         for loop in range(len(word)):
             if button in word[loop]:
-                letter_list[loop].configure(text=word[loop])
-            else: 
-                continue
-
+                letter_list[loop].configure(text=word[loop], text_color='black')
+        
+        # all() returns true only if all value are NOT '_', as '_' is the default text for letter_list
+        if all(value.cget("text") is not '_' for value in letter_list): 
+            CTkMessagebox(title='End of game', message="You've won! Congratulations", fade_in_duration=1, justify='center', 
+                          icon='check', button_color='gray', button_hover_color='white', button_text_color='black')
+                
     def wrong():
         for loop in range(0,1):
             draw = turtle.RawTurtle(hangCanvas)

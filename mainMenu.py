@@ -60,7 +60,7 @@ game4.grid(padx=10, pady=10, row=1, column=1)
 
 #-------------------Mouse listener function-------------------
 def on_click(x, y, button, pressed): # The on_click listener func takes x,y,button, and pressed, but for our app we only require button and pressed data
-    if pressed: print(button, 'has been pressed')
+    # if pressed: print(button, 'has been pressed')
     button = str(button)
     if button[-2] == 'f': # This is such a joke of a code but its funny
         mixer.init() # Initialise the mixer

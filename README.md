@@ -5,13 +5,15 @@ This is a minigames hub made with python and the customtkinter module. Currently
 # Games and Features
 TicTacToe:
   - Choose your difficulty (Begginer, Intermediate, Impossible)
-  - Choose who moves first (Me, The AI, Random)
+  - Choose who moves first (Me, The AI, Random)   
+
 Hangman:
   - Restart or Quit if you lose
-  - Hints *(to be implemented)*
+  - Hints *(to be implemented)*   
+
 Other:
   - Stylish icons
-  - Button press sound feedback
+  - Button press sound feedback   
 
 
 

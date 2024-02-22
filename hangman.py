@@ -9,7 +9,9 @@ python minigame hub.
 def hangman():
     #-------------------Libraries-------------------
     import customtkinter as ctk
-    import random
+    import random # for choosing word from wordpool
+    import turtle # using turtle for hangman
+    import tkinter as tk # using tk canvas, as ctk canvas produces unwanted behaviour
 
     #-------------------CTk appearance-------------------
     ctk.set_appearance_mode("Dark")
@@ -38,7 +40,7 @@ def hangman():
 
     
     #-------------------Left frame and right frame-------------------
-    hangCanvas = ctk.CTkCanvas(master=hang)
+    hangCanvas = tk.Canvas(master=hang) # custom tkinter seems to be broken when using ctk.CTkCanvas, tkinter naturally goes with turtle canvas
     hangCanvas.grid_propagate(False); hangCanvas.pack(side="left", fill="both", expand=True)
     # for side, fill and expand visual guide check https://stackoverflow.com/questions/28089942/difference-between-fill-and-expand-options-for-tkinter-pack-method
 
@@ -57,7 +59,13 @@ def hangman():
             if button in word[loop]:
                 letter_list[loop].configure(text=word[loop])
             else: 
-                pass
+                continue
+
+    def wrong():
+        for loop in range(0,1):
+            draw = turtle.RawTurtle(hangCanvas)
+            draw.circle(10)
+        
         
     #-------------------Display word-------------------
     wordPool = ['BLIZZARD', 'OXYGEN', 'HYPERTROPHY', 'VOODOO', 'ZODIAC', 'XYLOPHONE', 'TRANSCRIPT', 'UNBEKNOWN', 'AFOREMENTIONED', 'VISION',

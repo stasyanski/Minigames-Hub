@@ -51,12 +51,13 @@ def hangman():
     keyboardFrame.grid_propagate(False); keyboardFrame.pack(side="bottom", fill="both", padx=5, pady=5)
 
     #-------------------Hangman-------------------
-    def game(button):
+    def game(id, button):
+        button_list[id].configure(state=ctk.DISABLED, fg_color='#dcdcdc')
         for loop in range(len(word)):
             if button in word[loop]:
                 letter_list[loop].configure(text=word[loop])
             else: 
-                print('wrong')
+                pass
         
     #-------------------Display word-------------------
     wordPool = ['BLIZZARD', 'OXYGEN', 'HYPERTROPHY', 'VOODOO', 'ZODIAC', 'XYLOPHONE', 'TRANSCRIPT', 'UNBEKNOWN', 'AFOREMENTIONED', 'VISION',
@@ -74,10 +75,10 @@ def hangman():
     letter_list=[]
 
     for loop in range(0, len(word)):
-            relxval += 0.143 # adjust spacing between buttons, .143 is perfect spacing
+            relxval += 0.143575 # adjust spacing between buttons, .14375 is perfect spacing
             if loop % 6 == 0 : # if divisible by 6 (6,12,18,etc.) create a new row
                 relyval += 0.12 # increase y spacing
-                relxval = 0.143 # reset x position
+                relxval = 0.14375 # reset x position
             # creating label for each letter of the word
             letter = ctk.CTkLabel(master=wordFrame, height=30, width=48, text='_', text_color='gray', font=('Comic Sans MS', 27), fg_color='lightgray')
             letter.place(relx=relxval, rely=relyval, anchor="c")
@@ -89,14 +90,14 @@ def hangman():
                 'I': (4, 0), 'J': (4, 1), 'K': (4, 2), 'L': (4, 3), 'M': (4, 4), 'N': (4, 5), 'O': (4, 6), 'P': (4, 7),
                 'Q': (5, 0), 'R': (5, 1), 'S': (5, 2), 'T': (5, 3), 'U': (5, 4), 'V': (5, 5), 'W': (5, 6), 'X': (5, 7),
                 'Y': (6, 0), 'Z': (6, 1), 
-                'SPACE': (6, 2)}
+                ' ': (6, 2)}
     # dict maps each letter of the alphabet and the space to its row and column
 
     button_list=[]
     for current, (rowNum, columnNum) in alphabet.items():
-        if current == 'SPACE': 
+        if current == ' ': 
             # space is treated differently with bigger column day, representing common physical and virtual keyboard space buttons
-            button = ctk.CTkButton(master=keyboardFrame, width=250, height=30, text=current, font=('Comic Sans MS', 27),
+            button = ctk.CTkButton(master=keyboardFrame, width=250, height=30, text='SPACE', font=('Comic Sans MS', 27),
                                    fg_color='whitesmoke', text_color='gray', hover_color='#EEEEEE')
             button.grid(column=columnNum, row=rowNum, pady=1, padx=1, columnspan=6)
         else:
@@ -107,9 +108,9 @@ def hangman():
     
     # alphabet list to assign each button to the respective letter
     # having an alphabet dict and an alphabet list seems reduntant, think of an alternative, for example, ordered dict from collections
-    alphabet_list = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE']
+    alphabet_list = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ']
     for loop in range(len(button_list)):
-        button_list[loop].configure(command=lambda x=alphabet_list[loop]: game(x))
+        button_list[loop].configure(command=lambda y=loop, x=alphabet_list[loop]: game(y,x))
     
     """
     rather complex for loop and not easy to read, it iterates over everything in button_list, 

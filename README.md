@@ -19,10 +19,10 @@ Other:
 ## Screenshots
 
 #### Menu
-![Menu Screenshot](Screenshots\hub.png)
+![Menu Screenshot](Screenshots/hub.png)
 
-#### 
-![TicTacToe Screenshot](Screenshots\tictactoe.png)
+#### TicTacToe
+![TicTacToe Screenshot](Screenshots/tictactoe.png)
 
-#### Menu
-![Hangman Screenshot](Screenshots\hangman.png)
+#### Hanfman
+![Hangman Screenshot](Screenshots/hangman.png)

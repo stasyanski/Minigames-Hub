@@ -24,5 +24,5 @@ Other:
 #### TicTacToe
 ![TicTacToe Screenshot](Screenshots/tictactoe.png)
 
-#### Hanfman
+#### Hangman
 ![Hangman Screenshot](Screenshots/hangman.png)

@@ -16,6 +16,11 @@ def ticTacToe():
     ctk.set_appearance_mode("Dark")
     ctk.set_default_color_theme("green") 
 
+    #-------------------Global variables-------------------
+    global current; current='❌'
+    global turn; turn = True
+    global end; end = False
+
     #-------------------Menu window-------------------
     tic = ctk.CTk() # Reference to ticTacToe window as tic 
     window_height = 640; window_width = 400
@@ -27,11 +32,6 @@ def ticTacToe():
     tic.resizable(width=False, height=False)
     tic.title('TicTacToe')
     tic.iconbitmap('Resources/iconbitmap.ico')
-
-    #-------------------Global variables-------------------
-    global current; current='❌'
-    global turn; turn = True
-    global end; end = False
 
     #-------------------All functions go in below-------------------
 

@@ -14,7 +14,7 @@ def hangman():
     import tkinter as tk # using tk canvas, as ctk canvas produces unwanted behaviour
     from CTkMessagebox import CTkMessagebox
 
-    #-------------------Global Var-------------------
+    #-------------------Global variables-------------------
     global num_attempts # this var is used accross different funcs
     num_attempts = 0 # defining as 0 for number of attempts
 

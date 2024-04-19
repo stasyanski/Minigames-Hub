@@ -44,18 +44,24 @@ ticTacToe_image = ctk.CTkImage(light_image=Image.open('Resources/ticTacToe.png')
 hangman_image = ctk.CTkImage(light_image=Image.open('Resources/hangman.png'),
                                   dark_image=Image.open('Resources/hangman.png'),
                                   size=(250,250))
+snake_image = ctk.CTkImage(light_image=Image.open('Resources/snake.png'),
+                                  dark_image=Image.open('Resources/snake.png'),
+                                  size=(250,250))
+gamele_image = ctk.CTkImage(light_image=Image.open('Resources/gamele.png'),
+                                  dark_image=Image.open('Resources/gamele.png'),
+                                  size=(250,250))
 
 #-------------------Buttons for games-------------------
-game1 = ctk.CTkButton(master=frameButtons, text=' ',image=ticTacToe_image, width=367, height=268, command=ticTacToe)
+game1 = ctk.CTkButton(master=frameButtons, text='',image=ticTacToe_image, width=367, height=268, command=ticTacToe)
 game1.grid(padx=10, pady=10, row=0, column=0)
 
-game2 = ctk.CTkButton(master=frameButtons, text=' ',image=hangman_image, width=367, height=268, fg_color='#4169e1', hover_color='#3241A6', command=hangman) #royal blue hex
+game2 = ctk.CTkButton(master=frameButtons, text='',image=hangman_image, width=367, height=268, fg_color='#4169e1', hover_color='#3241A6', command=hangman) #royal blue hex
 game2.grid(padx=10, pady=10, row=0, column=1)
 
-game3 = ctk.CTkButton(master=frameButtons, text='Snake', width=367, height=268, fg_color='#5A5A5A', hover_color='#3241A6', command=snake)
+game3 = ctk.CTkButton(master=frameButtons, text='',image=snake_image, width=367, height=268, fg_color='#CBC3E3', hover_color='#8774be', command=snake)
 game3.grid(padx=10, pady=10, row=1, column=0)
 
-game4 = ctk.CTkButton(master=frameButtons, text='To be added', width=367, height=268, state='disabled', fg_color='#5A5A5A')
+game4 = ctk.CTkButton(master=frameButtons, text='',image=gamele_image, width=367, height=268, state='disabled', fg_color='#5A5A5A')
 game4.grid(padx=10, pady=10, row=1, column=1)
 
 #-------------------Mouse listener function-------------------

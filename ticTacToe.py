@@ -18,12 +18,10 @@ def ticTacToe():
 
     #-------------------Global variables-------------------
     global current; current='❌'
-    global turn; turn = True
-    global end; end = False
 
     #-------------------Menu window-------------------
     tic = ctk.CTk() # Reference to ticTacToe window as tic 
-    window_height = 520; window_width = 400
+    window_height = 510; window_width = 400
     screen_width = tic.winfo_screenwidth()
     screen_height = tic.winfo_screenheight()
     center_x = int(screen_width/2 - window_width / 2)
@@ -39,14 +37,12 @@ def ticTacToe():
     # start game
     def startGame():
         for current in buttons:
+            start.configure(state=ctk.DISABLED)
             current.configure(state=ctk.DISABLED)
         count(3) # starts timer countdown
 
-
     # end game
     def end_game():
-        print('endgame func called')
-        global end; end = True
         for i in buttons:
             i.configure(state=ctk.DISABLED)
         timer.configure(text="--------------------------------  Game Over  -------------------------------------")
@@ -54,8 +50,6 @@ def ticTacToe():
     
     # Function to check win conditions
     def check_winner():
-        print('check_winner called')
-
         # Check rows
         for i in range(3):
             if buttons[i*3].cget('text') == buttons[i*3+1].cget('text') == buttons[i*3+2].cget('text') != ' ':
@@ -84,20 +78,19 @@ def ticTacToe():
 
         if current == '❌':
             current = '⭕'
-            timer.configure(text="--------------------------------  Player 2 Move  -------------------------------------")
+            timer.configure(text="-------------------------------  Player 2 Move  ------------------------------------")
         else:
             current = '❌'
-            timer.configure(text="--------------------------------  Player 1 Move  -------------------------------------")
+            timer.configure(text="-------------------------------  Player 1 Move  ------------------------------------")
                 
 
     # Uses a recursive function to display the time and the after method allows you to wait a certain amouont of time for it to update 
     def count(sec):
-        print('count func called')
         if sec>0:
             timer.configure(text=f"-----------------------------  Starting in {sec} seconds  -----------------------------")
             timer.after(1000,count,sec-1)
         else :
-            timer.configure(text="--------------------------------  Player 1 Move  -------------------------------------")
+            timer.configure(text="-------------------------------  Player 1 Move  ------------------------------------")
             for current in buttons:
                 current.configure(state=ctk.NORMAL, hover_color='#106a43') # sets buttons to active after timer
 
@@ -130,6 +123,7 @@ def ticTacToe():
     # Function to assign signals to buttons
     for j,(x,y) in enumerate(positions):
         buttons[j].configure(command=lambda i=j:on_click(i))
+    
     #-------------------Timer label-------------------
     timer = ctk.CTkLabel(master=tic, text="---------------------------------------   Timer   ---------------------------------------")
     timer.pack()

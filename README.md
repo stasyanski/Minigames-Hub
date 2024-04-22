@@ -27,8 +27,6 @@ Other:
   - Button press sound feedback   
 
 
-
-
 ## Screenshots
 
 #### Menu
@@ -45,3 +43,8 @@ Other:
 
 #### Gamele
 ![Gamele Screenshot](Screenshots/gamele.png)
+
+## License and liability
+The MIT License lets you do almost anything you want with this project, even making and distributing closed source versions.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)

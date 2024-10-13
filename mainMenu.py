@@ -16,6 +16,7 @@ from pygame import mixer # Sound player for on mouse press
 from ticTacToe import ticTacToe
 from hangman import hangman
 from snake import snake
+from gamele import open_gamele
 
 #-------------------CTk appearance: check the docs for more info-------------------
 ctk.set_appearance_mode("Dark")
@@ -61,7 +62,7 @@ game2.grid(padx=10, pady=10, row=0, column=1)
 game3 = ctk.CTkButton(master=frameButtons, text='',image=snake_image, width=367, height=268, fg_color='#CBC3E3', hover_color='#8774be', command=snake)
 game3.grid(padx=10, pady=10, row=1, column=0)
 
-game4 = ctk.CTkButton(master=frameButtons, text='',image=gamele_image, width=367, height=268, state='disabled', fg_color='#5A5A5A')
+game4 = ctk.CTkButton(master=frameButtons, text='',image=gamele_image, width=367, height=268, fg_color='#621F87', hover_color='#53134A', command=open_gamele)
 game4.grid(padx=10, pady=10, row=1, column=1)
 
 #-------------------Mouse listener function-------------------
